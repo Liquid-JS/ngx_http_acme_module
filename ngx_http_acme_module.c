@@ -751,8 +751,8 @@ static char *ngx_http_acme_create_jwk(ngx_conf_t *cf, void *conf, RSA *key, json
 {
     ngx_str_t e, n, tmp;
     
-    BIGNUM rn, re, rd;
-    RSA_get0_key(key, rn, re, rd);
+    BIGNUM *rn, *re;
+    RSA_get0_key(key, &rn, &re, NULL);
 
     /* Baser64url encode e */
     tmp.len = BN_num_bytes(re);
